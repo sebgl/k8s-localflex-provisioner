@@ -13,7 +13,7 @@ if [ ! -d "/flexmnt/$driver_dir" ]; then
 	mkdir "/flexmnt/$driver_dir"
 fi
 
-cp "/$DRIVER" "/flexmnt/$driver_dir/.$DRIVER"
+cp "$DRIVER" "/flexmnt/$driver_dir/.$DRIVER"
 mv -f "/flexmnt/$driver_dir/.$DRIVER" "/flexmnt/$driver_dir/$DRIVER"
 
 # used for deployment script to know that this has finished

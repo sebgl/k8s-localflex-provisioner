@@ -4,14 +4,14 @@ FROM golang:1.9-alpine as builder
 RUN apk add --update --no-cache ca-certificates wget
 
 # Build
-WORKDIR /go/src/github.com/monostream/k8s-localflex-provisioner/
+WORKDIR /go/src/github.com/monostream/k8s-localflex-provisioner/provisioner
 
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o localflex-provisioner .
+RUN CGO_ENABLED=0 go build -a -ldflags '-extldflags "-static"' -o localflex-provisioner .
 
 # Copy artefacts
 WORKDIR /app/
-RUN cp /go/src/github.com/monostream/k8s-localflex-provisioner/localflex-provisioner .
+RUN cp /go/src/github.com/monostream/k8s-localflex-provisioner/provisioner/localflex-provisioner .
 RUN rm -r /go/src/
 
 # Download dumb-init 1.2.1
