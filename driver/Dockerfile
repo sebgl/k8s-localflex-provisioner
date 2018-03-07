@@ -21,4 +21,7 @@ WORKDIR /app/
 COPY scripts/deploy.sh .
 COPY --from=builder /app/ .
 
+# Setup environment
+ENV PATH "/app:${PATH}"
+
 CMD ["deploy.sh"]
